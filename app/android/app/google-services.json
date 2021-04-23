@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "520052185507",
+    "project_id": "retoapp-9e15d",
+    "storage_bucket": "retoapp-9e15d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520052185507:android:626679882073e68b22e216",
+        "android_client_info": {
+          "package_name": "com.reto.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520052185507-5cn9moj3qn1vlpkd2n32kut5obhkegt2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLS_f9PnAx2pU0d6QW6NnXtc0gNQQC9Js"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "520052185507-5cn9moj3qn1vlpkd2n32kut5obhkegt2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
