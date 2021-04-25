@@ -1,11 +1,23 @@
+import 'package:app/src/pages/splash_screen_page.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  //Controladores de entrada
   final TextEditingController _codigoController = TextEditingController();
   final TextEditingController _pinController = TextEditingController();
+  //Variables de campos
   String _codigo;
   String _pin;
 
+  //Validacion del boton
+  bool _botonActivado = false;
+
+  //Key del formulario
   GlobalKey<FormState> _key = GlobalKey();
 
   @override
@@ -27,7 +39,7 @@ class LoginPage extends StatelessWidget {
         children: <Widget>[
           SafeArea(
             child: Container(
-              height: 180.0,
+              height: 140.0,
             ),
           ),
           Container(
@@ -73,6 +85,7 @@ class LoginPage extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: TextFormField(
+        //Validacion del codigo
         validator: (text) {
           final isDigitsOnly = int.tryParse(text);
           if (text.length == 0 || text.length < 6) {
@@ -82,6 +95,7 @@ class LoginPage extends StatelessWidget {
           }
           return null;
         },
+
         onSaved: (text) => _codigo = text,
         controller: _codigoController,
         keyboardType: TextInputType.number,
@@ -97,7 +111,17 @@ class LoginPage extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: TextFormField(
+        onChanged: (value) {
+          setState(() {
+            if (value.isNotEmpty) {
+              _botonActivado = true;
+            } else {
+              _botonActivado = false;
+            }
+          });
+        },
         maxLength: 6,
+        //Validacion del pin
         validator: (text) {
           if (text.length < 4) {
             return "Este campo debe de tener minimo 4 digitos";
@@ -116,26 +140,36 @@ class LoginPage extends StatelessWidget {
 
   Widget _crearBoton(_key) {
     return RaisedButton(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
-        child: Text('Ingresar'),
-      ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-      elevation: 0.0,
-      color: Colors.blueAccent,
-      textColor: Colors.white,
-      onPressed: () {
-        if (!_key.currentState.validate()) {
-          return;
-        }
-        _key.currentState.save();
-      },
-    );
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
+          child: Text('Ingresar'),
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+        elevation: 0.0,
+        color: _botonActivado ? Colors.blueAccent : Colors.grey,
+        textColor: Colors.white,
+        onPressed: _botonActivado
+            ? () async {
+                //Validacion del formulario
+                if (!_key.currentState.validate()) {
+                  //Si tiene algun error lo retornamos
+                  return;
+                }
+                //Guardamos los campos de entrada en las variables
+                _key.currentState.save();
+
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) =>
+                      SplashScreenPage(codigo: _codigo, pin: _pin),
+                ));
+              }
+            : null);
   }
 
   Widget _crearFondo(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
+    //Decoracion del fondo
     final fondo = Container(
       height: size.height * 0.4,
       width: double.infinity,
@@ -161,7 +195,8 @@ class LoginPage extends StatelessWidget {
         Positioned(bottom: 120.0, right: 20.0, child: circulo),
         Positioned(bottom: -50.0, left: -20.0, child: circulo),
         Container(
-          padding: EdgeInsets.only(top: 80.0),
+          //Separacion del logo de 40 px
+          padding: EdgeInsets.only(top: 40.0),
           child: Column(
             children: <Widget>[
               Image(
