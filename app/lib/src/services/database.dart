@@ -1,7 +1,6 @@
 import 'package:app/src/models/users.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
 
 class DataBase {
   List<User> usuarios;

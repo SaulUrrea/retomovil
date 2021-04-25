@@ -61,21 +61,16 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 children: <Widget>[
                   Text('Login', style: TextStyle(fontSize: 25.0)),
-                  SizedBox(height: 60.0),
+                  SizedBox(height: 10.0),
                   _crearCodigo(),
-                  SizedBox(height: 30.0),
+                  SizedBox(height: 15.0),
                   _crearPassword(),
-                  SizedBox(height: 30.0),
+                  SizedBox(height: 10.0),
                   _crearBoton(_key)
                 ],
               ),
             ),
           ),
-          FlatButton(
-            child: Text('Crear una nueva cuenta'),
-            onPressed: () {},
-          ),
-          SizedBox(height: 100.0)
         ],
       ),
     );
@@ -141,11 +136,11 @@ class _LoginPageState extends State<LoginPage> {
   Widget _crearBoton(_key) {
     return RaisedButton(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
-          child: Text('Ingresar'),
+          padding: EdgeInsets.symmetric(horizontal: 70.0),
+          child: Text('Iniciar Sesion'),
         ),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-        elevation: 0.0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.0)),
+        elevation: 2,
         color: _botonActivado ? Colors.blueAccent : Colors.grey,
         textColor: Colors.white,
         onPressed: _botonActivado

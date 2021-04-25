@@ -28,4 +28,28 @@ class CardProvider {
 
     return recogidas.items;
   }
+
+  Future<List> entregasTotal() async {
+    var url =
+        "https://us-central1-cm-tim-dev.cloudfunctions.net/coordinadora_prueba/message/response";
+    var resp = await http.post(url);
+    final decodedData = json.decode(resp.body);
+
+    final entregas =
+        new Entregas.fromJsonList(decodedData["response"]["Entregas"]);
+
+    return entregas.items;
+  }
+
+  //Traer informacion de las recogidas
+  Future<List> recogidasTotal() async {
+    var url =
+        "https://us-central1-cm-tim-dev.cloudfunctions.net/coordinadora_prueba/message/response";
+    var resp = await http.post(url);
+    final decodedData = json.decode(resp.body);
+    final recogidas =
+        new Recogidas.fromJsonList(decodedData["response"]["Recogidas"]);
+
+    return recogidas.items;
+  }
 }

@@ -1,4 +1,3 @@
-import 'package:app/src/pages/inicio_page.dart';
 import 'package:app/src/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
@@ -11,10 +10,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Reto App',
       initialRoute: 'login',
-      routes: {
-        'login': (context) => LoginPage(),
-        'inicio': (context) => InicioPage(),
-      },
+      routes: {'login': (context) => LoginPage()},
     );
   }
 }

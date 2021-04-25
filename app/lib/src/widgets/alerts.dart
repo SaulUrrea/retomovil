@@ -17,7 +17,8 @@ class _AlertWidgetState extends State<AlertWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AlertDialog(
-              title: Text('Error al conectarse a la base de datos'),
+              title: Text(
+                  'Usuario Invalido o no existe en nuestra base de datos.'),
               actions: [
                 TextButton(
                   child: Text('Cerrar'),

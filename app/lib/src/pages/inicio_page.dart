@@ -15,10 +15,11 @@ class InicioPage extends StatefulWidget {
 }
 
 class _InicioPageState extends State<InicioPage> {
+  //Inicializamos el objeto datos de json
   CardProvider datos = new CardProvider();
   String nombre;
-  int entregasTotal;
-  int recogidasTotal;
+  int entregasTotal = 0;
+  int recogidasTotal = 0;
 
   @override
   void initState() {
@@ -31,12 +32,17 @@ class _InicioPageState extends State<InicioPage> {
     Future<List> datosrec = datos.recogidasResp();
     Future<List> datosent = datos.entregasResp();
 
+    datos.entregasTotal().then((value) => setState(() {
+          entregasTotal = value.length;
+        }));
+    datos.recogidasTotal().then((value) => recogidasTotal = value.length);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        toolbarHeight: 200,
+        toolbarHeight: 180,
         title: Column(
           children: [
             ListTile(
@@ -51,12 +57,12 @@ class _InicioPageState extends State<InicioPage> {
               subtitle: Text(
                 'Estas son tus tareas pendientes',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.grey[700], fontSize: 20),
+                style: TextStyle(color: Colors.grey[700], fontSize: 15),
               ),
               title: Text(
                 'Bienvenido, $nombre',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.blueAccent, fontSize: 25),
+                style: TextStyle(color: Colors.blueAccent, fontSize: 22),
               ),
             ),
             Center(
@@ -89,9 +95,11 @@ class _InicioPageState extends State<InicioPage> {
       ),
       body: Container(
           child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          SizedBox(height: 20),
           mostrarEntregas(context, datosent),
+          SizedBox(height: 20),
           mostrarRecogidas(context, datosrec)
         ],
       )),
@@ -115,7 +123,6 @@ class _InicioPageState extends State<InicioPage> {
       future: datosent,
       builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
         if (snapshot.hasData) {
-          entregasTotal = snapshot.data.length;
           return CardEntregasWidget(entregas: snapshot.data);
         }
         return Center(child: CircularProgressIndicator());
@@ -128,7 +135,6 @@ class _InicioPageState extends State<InicioPage> {
       future: datorec,
       builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
         if (snapshot.hasData) {
-          recogidasTotal = snapshot.data.length;
           return CardRecogidasWidget(recogidas: snapshot.data);
         }
         return Center(child: CircularProgressIndicator());

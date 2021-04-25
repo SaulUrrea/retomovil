@@ -49,7 +49,9 @@ class _SplashScreenState extends State<SplashScreenPage> {
   }
 
   getData(codigo, pin) async {
+    //Conectamos con la base de datos
     await Firebase.initializeApp();
+    //Validamos usuario
     usuario = await database.getUsuarios(codigo: codigo, pin: pin);
   }
 }
