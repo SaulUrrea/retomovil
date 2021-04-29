@@ -191,13 +191,9 @@ class _LoginPageState extends State<LoginPage> {
         Positioned(bottom: -50.0, left: -20.0, child: circulo),
         Container(
           //Separacion del logo de 40 px
-          padding: EdgeInsets.only(top: 40.0),
+          padding: EdgeInsets.only(top: 80.0),
           child: Column(
-            children: <Widget>[
-              Image(
-                  image: NetworkImage(
-                      'https://artegelitalia.com.co/wp-content/uploads/2017/06/coordinadora.png')),
-            ],
+            children: <Widget>[Image(image: AssetImage('assets/img/logo.png'))],
           ),
         )
       ],

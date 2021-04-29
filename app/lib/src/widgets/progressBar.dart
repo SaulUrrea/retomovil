@@ -15,9 +15,7 @@ class _ProgressBarState extends State<ProgressBar> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image(
-                image: NetworkImage(
-                    'https://artegelitalia.com.co/wp-content/uploads/2017/06/coordinadora.png')),
+            Image(image: AssetImage('assets/img/logo.png')),
             SizedBox(height: 10),
             Text(
               'Cargando ...',
